@@ -1,0 +1,64 @@
+package main.data;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Withdraw extends WorkParsen {
+	
+	AccountManager manager;
+	
+    public Deposit(){
+    	manager = AccountManager.get();
+    	name = ArsEnum.입금.toString();
+    }
+    
+	@Override
+	public void progress() { 
+	    super.progress();
+		Scanner scanner = new Scanner(System.in);
+		long acc = 0;
+		long input = 0;
+		Account guest = null;
+		
+		while(true) {
+			// 1. 입금계좌 확인
+		    System.out.println("------------------------");
+			System.out.println("계좌를 입력해주세요.");
+			if(!manager.prtAccount(acc)) {
+				acc = scanner.nextLong();
+				 System.out.println("해당 계좌가 없습니다. 다시 조회해 주십시오.");
+	             scanner.next();
+			}
+			// 2. 비밀번호 확인
+			else {
+				while(true) {
+					System.out.println("비밀번호를 공백없이 4자리를 입력해주세요.");
+					guest = manager.isAccountPassword(acc,scanner.nextLine());
+					if(guest != null) { break; } 
+					else {
+						System.out.print("비밀번호가 다릅니다.");
+					}
+				}
+				// 2. 입금 후 금액확인
+				 System.out.println("------------------------");
+				 System.out.println("입금할 금액을 입력해주세요.");
+				 while(true) {
+					while (!scanner.hasNextLong()) {
+						System.out.println("유효하지 않은 입력입니다. 숫자만 입력해 주세요.");
+						scanner.next();
+					}
+					if(!guest.depositAmount(scanner.nextLong())) {
+						 System.out.println("입금 금액을 추가할 수 없습니다. 다시 입력해주세요.");
+					}
+					else { break; }
+					break;
+				 }
+				 
+				manager.add(acc,guest);
+				manager.prtAccount(acc);
+				System.out.println("계좌에 입금되었습니다. 초기 화면으로 넘어갑니다.");
+				progress = false;
+			}
+		}
+	}
+}

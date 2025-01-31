@@ -1,0 +1,93 @@
+package main.data;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class Withdraw extends WorkParsen {
+
+    public Withdraw(){
+    	super();
+    	name = ArsEnum.출금.toString();
+    }
+    
+    Account withdrawAmount(Account acc) {
+		Scanner scanner = new Scanner(System.in);
+		long input = 0;
+		
+		System.out.println("------------------------");
+		while(true) {
+			System.out.println("출금할 금액을 입력해주세요. 종료를 원하시면 0을 입력해주세요.");
+			while (!scanner.hasNextLong()) {
+				System.out.println("유효하지 않은 입력입니다. 숫자만 입력해 주세요.");
+				scanner.next();
+			}
+			input = scanner.nextLong();
+			if(input == 0) { return null; }
+			if(!acc.depositAmount(input)){
+				System.out.println("입금할 수 없습니다. 다시 입력해주세요.");
+			}
+			else { return acc; }
+		}		
+    }
+    
+	@Override
+	public void progress() { 
+	    super.progress();
+	    
+		long acc = accountInput(); // 함수를 통해 계좌 여부를 가져온다.
+		if(acc == 0) { setResult(); }
+		Account guest = passward(acc); // 함수를 통해 계좌와 비밀번호가 일치하는지 보여준다.
+		if(guest == null) { setResult(); }
+		
+		
+	    
+//		Scanner scanner = new Scanner(System.in);
+//		long acc = 0;
+//		String input = "";
+//		Account guest = null;
+//		
+//		while(true) {
+//			// 1. 입금계좌 확인
+//		    System.out.println("------------------------");
+//			System.out.println("계좌를 입력해주세요.");
+//			acc = scanner.nextLong();
+//			if(!manager.prtAccount(acc)) {
+//				System.out.println("해당 계좌가 없습니다. 다시 조회해 주십시오.");
+//				scanner.next();
+//			}
+//			// 2. 비밀번호 확인
+//			else {
+//				while(true) {
+//					System.out.println("비밀번호를 공백없이 4자리를 입력해주세요.");
+//					scanner.nextLine();
+//					guest = manager.isAccountPassword(acc,scanner.next());
+//					if(guest != null) { break; } 
+//					else {
+//						System.out.print("비밀번호가 다릅니다.");
+//					}
+//				}
+//				// 2. 입금 후 금액확인
+//				 System.out.println("------------------------");
+//				 System.out.println("입금할 금액을 입력해주세요.");
+//				 while(true) {
+//					while (!scanner.hasNextLong()) {
+//						System.out.println("유효하지 않은 입력입니다. 숫자만 입력해 주세요.");
+//						scanner.next();
+//					}
+//					if(!guest.withdrawAmount(scanner.nextLong())) {
+//						 System.out.println("출금할 수 없습니다. 다시 입력해주세요.");
+//					}
+//					else { break; }
+//					break;
+//				 }
+//				 
+//				manager.add(acc,guest);
+//				manager.prtAccount(acc);
+//				System.out.println("계좌에 입금되었습니다. 초기 화면으로 넘어갑니다.");
+//				progress = false;
+//				break;
+//			}
+//		}
+	}
+}
+

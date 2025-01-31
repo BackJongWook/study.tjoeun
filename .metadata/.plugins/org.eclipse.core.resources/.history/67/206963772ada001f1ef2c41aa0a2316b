@@ -1,0 +1,30 @@
+package main.data;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Inquiry extends WorkParsen {
+	
+    public Inquiry(){
+    	manager = AccountManager.get();
+    	name = ArsEnum.계좌조회.toString();
+    }
+	
+	@Override
+	public void progress() { 
+	    super.progress();
+		Scanner scanner = new Scanner(System.in);
+		long input = 0;
+		
+		while(true) {
+
+			input = accountInput();
+			if(input != 0) {
+				 System.out.println("계좌 조회가 되었습니다.\n"+name+" 업무를 종료합니다. 초기화면으로 돌아갑니다.");
+				break;
+			}
+			
+			
+		}
+		progress = false;
+	}
+}

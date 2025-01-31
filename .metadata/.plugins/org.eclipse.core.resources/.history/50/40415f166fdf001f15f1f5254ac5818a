@@ -1,0 +1,24 @@
+package main;
+import main.data.*;
+
+public class Main {
+	public static void main(String[] args) {
+		WorkParsen work = new WorkParsen();		
+		while(work != null) {
+			ArsSelecter selecter = new ArsSelecter();
+			switch(selecter.getIput()) {
+				case 0:{ work = new Creation(); } break; // 생성
+				case 1:{ work = new Inquiry(); } break; // 조회
+				case 2:{ work = new Deposit(); } break; // 입금
+				case 3:{ work = new Withdraw(); } break; // 출금
+				case 4:{ } break; // 송금
+				case 5: default:{
+					System.out.println("업무를 종료합니다.");
+					work = null;
+					return;
+				}
+			}
+			work.update();
+		}
+	}
+}

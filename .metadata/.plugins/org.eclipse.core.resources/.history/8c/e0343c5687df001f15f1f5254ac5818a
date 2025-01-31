@@ -1,0 +1,82 @@
+package main.data;
+
+import java.util.*;
+
+public class Remit extends WorkParsen {
+	
+    public Remit(){
+    	super();
+    	name = ArsEnum.입금.toString();
+    }
+    
+    Account remit(long post,long set) {
+		Scanner scanner = new Scanner(System.in);
+		Map<String,Account> get = new HashMap<>();
+		long input = 0;
+		while(true) {
+			System.out.println("송금할 금액을 입력해주세요. 종료를 원하시면 0을 입력해주세요.");
+			while (!scanner.hasNextLong()) {
+				System.out.println("유효하지 않은 입력입니다. 숫자만 입력해 주세요.");
+				scanner.next();
+			}
+			input = scanner.nextLong();
+			if(input == 0) { return null; }
+			get = manager.postAccounts(post, set, input);
+			for(String key: get.keySet()) {
+				switch(key) {
+					case "clear":{
+						for(Account acc : get.values()) {
+							return acc; 
+						}
+					}break;
+					case "post":{
+						System.out.print("보낼 계좌문제 다시 ");
+					}break;
+					case "set":{
+						System.out.print("받을 계좌문제 다시 ");
+					}break;
+				}
+			}
+			
+		}
+    }
+	
+	@Override
+	public void progress() { 
+	    super.progress();
+	
+	    // 1. 출금계좌 
+	    // 2. 비밀번호
+	    // 3. 입금계좌
+	    // 4. 출금계좌 계산
+	    // 5. 입금계좌 계산
+	    // 6. 진행
+	    
+		long setAcc = accountInput(); // 보낼 계좌 여부를 가져온다.
+		if(setAcc == 0) { setResult(); }
+		Account setGuest = passward(setAcc); // 함수를 통해 계좌와 비밀번호가 일치하는지 보여준다.
+		if(setGuest == null) { setResult(); }
+		long getAcc = accountInput(); // 받을 계좌 여부를 가져온다.
+		if(getAcc == 0) { setResult(); }
+		setGuest = remit(setAcc,getAcc);
+		if(setGuest == null) { setResult(); }
+		else {
+			
+		}
+		
+	    
+//		long acc = accountInput(); // 함수를 통해 계좌 여부를 가져온다.
+//		if(acc == 0) { setResult(); }
+//		Account guest = passward(acc); // 함수를 통해 계좌와 비밀번호가 일치하는지 보여준다.
+//		if(guest == null) { setResult(); }
+//		guest = depositAmount(guest); // 함수를 통해 계산이 가능한지 보내준다.
+//		if(guest == null) { setResult(); }
+//		else {
+//			progress = false;
+//			manager.prtAccount(acc);
+//			System.out.println("입금이 되었습니다. 초기 화면으로 넘어갑니다.");
+//		}
+	}
+    
+    
+}

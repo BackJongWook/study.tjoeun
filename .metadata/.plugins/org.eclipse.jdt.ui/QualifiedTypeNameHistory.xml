@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="blackjack.playing.Npc"/>
+    <fullyQualifiedTypeName name="blackjack.playing.Table"/>
+    <fullyQualifiedTypeName name="blackjack.playing.Player"/>
+    <fullyQualifiedTypeName name="main.data.ArsEnum"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.util.Map"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="main.selecter.SelecterEnum"/>
+</qualifiedTypeNameHistroy>
