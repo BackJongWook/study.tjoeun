@@ -30,6 +30,8 @@ public class Exchange extends Bank{
 			}
 			first.setBalance(-1*input);
 			second.setBalance(input);
+			System.out.print(first);
+			System.out.print(second);
 			if(manager().setBalance(first,second)) {
 				
 			}
