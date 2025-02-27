@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
     <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-        <listEntry value="/java01/src/lesson20250116/Main.java"/>
+        <listEntry value="/084jdbc/src/com/huaman/util/main.java"/>
     </listAttribute>
     <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
         <listEntry value="1"/>
     </listAttribute>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_EXCLUDE_TEST_CODE" value="true"/>
-    <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="lesson20250116.Main"/>
+    <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.huaman.util.main"/>
     <stringAttribute key="org.eclipse.jdt.launching.MODULE_NAME" value=""/>
-    <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="java01"/>
+    <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="084jdbc"/>
 </launchConfiguration>
