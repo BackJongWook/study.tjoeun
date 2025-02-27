@@ -26,6 +26,5 @@ public class Main {
 			}
 			work.update();
 		}
-		System.out.println("새로운 명령어");
 	}
 }
