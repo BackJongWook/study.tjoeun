@@ -17,9 +17,8 @@ public class Main {
 		Selecters selecter = new Selecters();
 		while (selecter != null) {
 			switch (selecter.input()) {
-				case 0: {
+				case 0: 
 					slt = new Reserve();
-				}
 					break;
 				case 1:
 					slt = new Search();

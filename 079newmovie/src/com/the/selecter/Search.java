@@ -43,6 +43,7 @@ public class Search extends Program {
 					System.out.println("예매 주문 번호: " + i.reservation_id);
 					System.out.println("영화 제목: " + i.title);
 					System.out.println("상영 시간: " + i.screening_time);
+					System.out.println("예메 좌석: " + i.seat_count);
 					pwCorrect = true;
 					break;
 				}
@@ -61,7 +62,7 @@ public class Search extends Program {
 
 		try {
 			ResultSet rsvData = sql.statementQuery(
-					String.format("select r.reservation_id,r.screening_id,m.title,s.screening_time,r.password_pw"
+					String.format("select r.reservation_id,r.screening_id,m.title,s.screening_time,r.password_pw,r.seat_count"
 							+ " from reservation r join screening s on r.screening_id = s.screening_id"
 							+ " join movie m on s.movie_id = m.movie_id" + " where reservation_id='%d'", id));
 			while (rsvData.next()) {
@@ -71,6 +72,7 @@ public class Search extends Program {
 				temp.title = rsvData.getString("title");
 				temp.screening_time = rsvData.getTimestamp("screening_time");
 				temp.password_pw = rsvData.getInt("password_pw");
+				temp.seat_count = rsvData.getInt("seat_count");
 				rsv.add(temp);
 			}
 		} catch (Exception e) {
