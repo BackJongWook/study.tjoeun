@@ -22,10 +22,24 @@ public class Delete extends Program { // 현재 java파일이 delete하는것을
 
 		boolean pwCorrect = false;
 		while (!pwCorrect) {
-			int inputPW = UserInput.inputInt("비밀번호를 입력하세요.");
-
+			System.out.println("비밀번호를 입력하세요.(취소시 'cancel'입력)");
+			String inputPW = new Scanner(System.in).nextLine();
+			
+			if("cancel".equalsIgnoreCase(inputPW)) { //입력값이 'cancel'일 시 반복 취소
+				System.out.println("입력이 취소됐습니다.");
+				return false;
+			}
+			
+			int inputPassword;
+			try {
+				inputPassword = Integer.valueOf(inputPW); //입력값을 문자로
+			} catch(Exception e) {
+				System.out.println("올바른 값을 입력하세요.");
+				continue; //잘못된 입력값일 경우 다시 입력 받음.
+			}
+			
 			for (ReservationMovieScreen i : srch) {
-				if (inputPW == i.password_pw) {
+				if (inputPassword == i.password_pw) {
 					System.out.println("예매 주문 번호: " + i.reservation_id);
 					System.out.println("예매 영화: " + i.title);
 					String inputDelete = UserInput.inputString("삭제하시겠습니까? Y/N");
