@@ -27,6 +27,7 @@ public class Delete extends Program { // 현재 java파일이 delete하는것을
 			for (ReservationMovieScreen i : srch) {
 				if (inputPW == i.password_pw) {
 					System.out.println("예매 주문 번호: " + i.reservation_id);
+					System.out.println("예매 영화: " + i.title);
 					String inputDelete = UserInput.inputString("삭제하시겠습니까? Y/N");
 					if (inputDelete.equals("y")) {
 						String sql = String.format("delete from reservation where reservation_id='%d'", inputRsvId);

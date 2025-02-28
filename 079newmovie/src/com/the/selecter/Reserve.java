@@ -34,34 +34,38 @@ public class Reserve extends Program  {
 		
 	@Override
 	boolean progress() {
-		// 영화 리스트 보여주기 
-		// 2.그걸 가공해서 보여줘야됨 
-		List<Movies> te = getMovies();
+		List<Movies> mv = getMovies();
 		System.out.println("---------------");
-		for(Movies i: te) {
-			System.out.printf(i.id+" : ");
-			System.out.printf(i.title+ " : ");
-			System.out.println("장르: "+i.genre);
+		
+		List<String> movieInfo = new  ArrayList<>();
+		for(int i=0;i<mv.size();i++) {
+			Movies movies = mv.get(i);
+			String info = (i+1) + " : " + movies.title + " : " + movies.genre;
+			movieInfo.add(info);
+			System.out.println(info);
 		}
 		System.out.println("영화를 선택하십시오.");
-		int movieInput = sc.nextInt();
+		int movieInputIndex = sc.nextInt(); //입력받은 영화 번호
+		int movieInput = movieInputIndex-1; //실제 영화 인덱스 변호
 		
 		//선택한 영화 정보 저장
-		Movies selectedMovie = null;
-		for(Movies movie : te) {
-			if(movie.id == movieInput) {
-			selectedMovie = movie;
-			break;
-			}
-		}
+		Movies selectedMovie = mv.get(movieInput);
 		
-		List<Screening> scr = getScreening(movieInput);
+		List<Screening> scr = getScreening(selectedMovie.id);
 		System.out.println("");
 		System.out.println("선택한 영화: " + selectedMovie.title + " (" + selectedMovie.genre + ")");
-		for(Screening i: scr) {
-			System.out.printf(i.screening_id+" : ");
-			System.out.println("상영시간: "+i.screening_time);
-			}
+		
+		List<String> screeningInfo = new ArrayList<>();
+		for(int i=0;i<scr.size();i++) {
+			Screening screening = scr.get(i);
+			String info = (i+1) + " : " + "상영시간: " + screening.screening_time;
+			screeningInfo.add(info);//상영정보 리스트에 추가
+			System.out.println(info); //콘솔 출력
+		}
+//		for(Screening i: scr) {
+//			System.out.printf(screeningIndex+" : ");
+//			System.out.println("상영시간: "+i.screening_time);
+//			}
 		System.out.println("상영시간을 선택하십시오.");
 		int screeningInput = sc.nextInt();
 		
@@ -71,7 +75,7 @@ public class Reserve extends Program  {
 		System.out.println("해당 주문의 비밀번호를 입력하세요.");
 		int pwInput = sc.nextInt();
 		
-		insertMovieAndScreening(screeningInput, seatInput, pwInput);
+		insertMovieAndScreening(scr.get(screeningInput-1).screening_id, seatInput, pwInput);
 		int rsId = getReservationMaxId();
 		System.out.println("예매 완료");
 		System.out.println("예매 번호는 "+rsId+"입니다. 비밀번호를 기억해주세요.");
@@ -144,7 +148,7 @@ public class Reserve extends Program  {
 		try {
 			while(rs.next()) {
 				returnId = rs.getInt("max_id");
-			} 
+			}
 		}catch (SQLException e) {
 				e.printStackTrace();
 			}
